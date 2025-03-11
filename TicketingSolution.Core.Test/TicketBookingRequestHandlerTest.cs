@@ -1,4 +1,6 @@
 ﻿using Shouldly;
+using TicketingSolution.Core.Handler;
+using TicketingSolution.Core.Model;
 
 namespace TicketingSolution.Core;
 

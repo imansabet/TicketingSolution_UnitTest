@@ -1,7 +1,8 @@
-﻿
-namespace TicketingSolution.Core
+﻿using TicketingSolution.Core.Model;
+
+namespace TicketingSolution.Core.Handler
 {
-    internal class TicketBookingRequestHandler
+    public class TicketBookingRequestHandler
     {
         public TicketBookingRequestHandler()
         {

@@ -1,4 +1,4 @@
-﻿namespace TicketingSolution.Core
+﻿namespace TicketingSolution.Core.Model
 {
     public class ServiceBookingResult
     {
