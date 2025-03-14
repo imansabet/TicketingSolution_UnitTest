@@ -122,4 +122,29 @@ namespace TicketingSolution.Core;
         bookingSuccessFlag.ShouldBe(result.Flag);
     
     }
+
+
+    [Theory]
+    [InlineData(1,true)]
+    [InlineData(null, false)]
+    public void Should_Return_TicketBookingId_In_Result(int? ticketBookingId , bool isAvailable) 
+    {
+        if (!isAvailable) 
+        {
+            _availableTickets.Clear();
+        }
+        else 
+        {
+            _ticketBookingServiceMock.Setup(x => x.Save(It.IsAny<TicketBooking>()))
+            .Callback<TicketBooking>
+            (booking =>
+            {
+                TicketBooking.Id = ticketBookingId.Value;
+
+            });
+        }
+        var result = _handler.BookService(_request);
+        result.TicketBookingId.ShouldBe(ticketBookingId);
+        
+    }
 }

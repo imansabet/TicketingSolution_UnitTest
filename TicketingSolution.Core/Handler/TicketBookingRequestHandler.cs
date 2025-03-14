@@ -31,7 +31,8 @@ namespace TicketingSolution.Core.Handler
                 TicketBooking.TicketId = Ticket.Id;
 
                 _ticketBookingService.Save(TicketBooking);
-
+               
+                result.TicketBookingId = TicketBooking.TicketId;
                 result.Flag = Enums.BookingResultFlag.Success;
             }
             else 
