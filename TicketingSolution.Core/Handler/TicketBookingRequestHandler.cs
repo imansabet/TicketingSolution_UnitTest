@@ -2,6 +2,7 @@
 using TicketingSolution.Core.Data_Services;
 using TicketingSolution.Core.Domain;
 using System.Net.Sockets;
+using TicketingSolution.Domain.BaseModels;
 namespace TicketingSolution.Core.Handler
 {
     public class TicketBookingRequestHandler
