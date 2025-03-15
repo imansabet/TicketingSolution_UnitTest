@@ -10,14 +10,28 @@ namespace TicketingSolution.Persistence.Repositories
 {
     public class TicketingBookingService : ITicketBookingService
     {
+        private readonly TicketingSolutionDbContext _context;
+
+        public TicketingBookingService(TicketingSolutionDbContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Ticket> GetAvailableTickets(DateTime date)
         {
-            throw new NotImplementedException();
+
+
+            return _context.Tickets
+                .Where(q => !q.TicketBooking.Any(x => x.Date == date))
+                .ToList();
+
+             ;
         }
 
         public void Save(TicketBooking ticketBooking)
         {
-            throw new NotImplementedException();
+            _context.Add(ticketBooking);
+            _context.SaveChanges();
         }
     }
 }
