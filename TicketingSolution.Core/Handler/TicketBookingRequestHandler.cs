@@ -5,24 +5,24 @@ using System.Net.Sockets;
 using TicketingSolution.Domain.BaseModels;
 namespace TicketingSolution.Core.Handler
 {
-    public class TicketBookingRequestHandler
+    public class TicketBookingRequestHandler : ITicketBookingRequestHandler
     {
         private readonly ITicketBookingService _ticketBookingService;
 
-        public TicketBookingRequestHandler(ITicketBookingService  ticketBookingService)
+        public TicketBookingRequestHandler(ITicketBookingService ticketBookingService)
         {
             _ticketBookingService = ticketBookingService;
         }
 
         public ServiceBookingResult BookService(TicketBookingRequest bookingRequest)
         {
-            if(bookingRequest is null) 
+            if (bookingRequest is null)
             {
                 throw new ArgumentNullException(nameof(bookingRequest));
             }
 
             var availableTickets = _ticketBookingService.GetAvailableTickets(bookingRequest.Date);
-            
+
             var result = CreateTicketBookingObject<ServiceBookingResult>(bookingRequest);
 
             if (availableTickets.Any())
@@ -32,11 +32,11 @@ namespace TicketingSolution.Core.Handler
                 TicketBooking.TicketId = Ticket.Id;
 
                 _ticketBookingService.Save(TicketBooking);
-               
+
                 result.TicketBookingId = TicketBooking.TicketId;
                 result.Flag = Enums.BookingResultFlag.Success;
             }
-            else 
+            else
             {
                 result.Flag = Enums.BookingResultFlag.Failure;
 
@@ -52,7 +52,7 @@ namespace TicketingSolution.Core.Handler
                 Name = bookingRequest.Name,
                 Family = bookingRequest.Family,
                 Email = bookingRequest.Email
-            }; 
+            };
         }
 
 
